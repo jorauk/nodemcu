@@ -46,26 +46,26 @@ def dummy():
 
     return response_template % body
 
+pin = machine.Pin(10, machine.Pin.OUT)
+
+def lights_on():
+     pin.value(1)
+     body = "Lights on"
+     
+     return response_template % body
+
+def lights_off():
+     pin.value(0)
+     body = "Lights off"
+     
+     return response_template % body
+
 handlers = {
     'time': time,
     'dummy': dummy,
     'lights_on': lights_on,
     'lights_off': lights_off,
 }
-
-pin = machine.Pin(9, machine.Pin.OUT)
-
-def lights_on():
-    pin.value(1)
-    body = "Light is on"
-    
-    return response_template % body
-    
-def lights_off():
-    pin.value(0)
-    body = "Light is off"
-    
-    return response_template % body
 
 def main():
     s = socket.socket()
