@@ -67,12 +67,20 @@ def switch_web():
     
     return response_template % body
     
+adc = machine.ADC(0)
+    
+def light():
+    body = "{value: " + str(adc.read()) + "}"
+    
+    return response_template % body
+    
 handlers = {
     'time': time,
     'dummy': dummy,
     'lights_on': lights_on,
     'lights_off': lights_off,
     'switch_web': switch_web,
+    'light': light,
 }
 
 def main():
