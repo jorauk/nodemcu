@@ -46,25 +46,33 @@ def dummy():
 
     return response_template % body
 
-pin = machine.Pin(10, machine.Pin.OUT)
+light_pin = machine.Pin(10, machine.Pin.OUT)
 
 def lights_on():
-     pin.value(1)
+     light_pin.value(1)
      body = "Lights on"
      
      return response_template % body
 
 def lights_off():
-     pin.value(0)
+     light_pin.value(0)
      body = "Lights off"
      
      return response_template % body
 
+switch_pin = machine.Pin(5, machine.Pin.IN)
+
+def switch_web():
+    body = "{state: " + str(switch_pin.value()) + "}"
+    
+    return response_template % body
+    
 handlers = {
     'time': time,
     'dummy': dummy,
     'lights_on': lights_on,
     'lights_off': lights_off,
+    'switch_web': switch_web,
 }
 
 def main():
